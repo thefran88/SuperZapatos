@@ -1,0 +1,87 @@
+﻿@model Super_Zapatos.Models.Articles_Index_VM
+
+@{
+    ViewBag.Title = "Artículos";
+}
+
+<h2>Artículos</h2>
+
+
+@using (Html.BeginForm())
+{
+    <div style="position:relative;">
+        @Html.ActionLink("Crear artículo", "Create", null, new { @style = "position:absolute; bottom:0; left:0;" })
+        <div style="text-align:right;">
+            @Html.DropDownListFor(model => model.StoresSelectedID, Model.StoresSelect, new { @class = "form-control", @style = "display:inline;", @title = "Filtrar artículos por tienda." })
+
+            <button type="submit" class="btn btn-default">Filtrar</button>
+        </div>
+    </div>
+
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => new Super_Zapatos.Models.Article().name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => new Super_Zapatos.Models.Article().description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => new Super_Zapatos.Models.Article().price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => new Super_Zapatos.Models.Article().total_in_shelf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => new Super_Zapatos.Models.Article().total_in_vault)
+        </th>
+        <th>
+            Tienda
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Articles)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total_in_shelf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total_in_vault)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.store_name)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalle", "Details", new { id = item.id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    <script>
+        $(function () {
+            $('#StoresSelectedID').prepend(`<option value="">Todas las tiendas</option>`);
+
+            @if (Model.StoresSelectedID == 0)
+            {
+                @:$("#StoresSelectedID").val($("#target option:first").val());
+            }
+        });
+    </script>
+}
