@@ -185,6 +185,7 @@
     <Content Include="App_Data\SuperZapatosDB_log.ldf">
       <DependentUpon>SuperZapatosDB.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\TextFile1.txt" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
